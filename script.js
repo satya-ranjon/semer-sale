@@ -1,11 +1,14 @@
+// Function to get an element by its ID
 function getElement(id) {
   return document.getElementById(id);
 }
 
+// Function to hide the modal
 function hideModal() {
   getElement("modal").style.display = "none";
 }
 
+// Function to open the modal and reset values
 function openModal() {
   getElement("modal").style.display = "block";
 
@@ -23,15 +26,18 @@ function openModal() {
   // Clear the totalPrice
   totalPrice = 0.0;
 
+  // Enable coupon button and purchase button
   enableCouponButton();
   enablePurchaseButton();
 }
 
+// Function to apply a coupon code
 function applyCouponCode() {
   couponCode = getElement("coupon_input").value;
   updateDisplayedValues();
 }
 
+// Function to update displayed values based on calculated discounts
 function updateDisplayedValues() {
   const discountPrice = calculateDiscountPrice();
   const displayDiscountPrice = formatPrice(
@@ -48,14 +54,17 @@ function updateDisplayedValues() {
   getElement("display_total").textContent = displayTotal;
 }
 
+// Function to calculate the discount price
 function calculateDiscountPrice() {
   return (totalPrice * discountPercentage) / 100;
 }
 
+// Function to format a price to display with "TK" at the end
 function formatPrice(price) {
   return price.toFixed(2) + " TK";
 }
 
+// Function to handle a product click event
 function handleProductClick(container) {
   const productName = container.querySelector(".product_name").textContent;
   const productPrice = container.querySelector(".product_price").textContent;
@@ -72,6 +81,7 @@ function handleProductClick(container) {
   enablePurchaseButton();
 }
 
+// Function to enable/disable the coupon button based on total price
 function enableCouponButton() {
   if (totalPrice >= 200) {
     getElement("coupon_apply_btn").removeAttribute("disabled");
@@ -80,6 +90,7 @@ function enableCouponButton() {
   }
 }
 
+// Function to enable/disable the purchase button based on total price
 function enablePurchaseButton() {
   if (totalPrice > 0) {
     getElement("purchase").removeAttribute("disabled");
@@ -88,21 +99,26 @@ function enablePurchaseButton() {
   }
 }
 
+// Select all product containers and card items list
 const singleProductContainers = document.querySelectorAll(".single-product");
 const cardItemsList = getElement("card_items");
 
+// Initial values
 let totalPrice = 0;
 let discountPercentage = 20;
 let couponCode = "";
 
+// Hide the modal initially
 hideModal();
 
+// Attach click event listeners to each product container
 singleProductContainers.forEach((container) => {
   container.addEventListener("click", () => {
     handleProductClick(container);
   });
 });
 
+// Attach event listeners to buttons
 getElement("coupon_apply_btn").addEventListener("click", applyCouponCode);
 getElement("purchase").addEventListener("click", openModal);
 getElement("close_modal_btn").addEventListener("click", hideModal);
