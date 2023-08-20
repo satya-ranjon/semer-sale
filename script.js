@@ -6,11 +6,6 @@ function getElement(id) {
 // Function to hide the modal
 function hideModal() {
   getElement("modal").style.display = "none";
-}
-
-// Function to open the modal and reset values
-function openModal() {
-  getElement("modal").style.display = "block";
 
   // Reset displayed values to "00.00 Tk"
   getElement("display_total_price").textContent = "00.00 Tk";
@@ -29,6 +24,11 @@ function openModal() {
   // Enable coupon button and purchase button
   enableCouponButton();
   enablePurchaseButton();
+}
+
+// Function to open the modal and reset values
+function openModal() {
+  getElement("modal").style.display = "block";
 }
 
 // Function to apply a coupon code
@@ -73,7 +73,7 @@ function handleProductClick(container) {
   totalPrice += modifiedProductPrice;
 
   const listItem = document.createElement("li");
-  listItem.textContent = `${productName} - ${productPrice}`;
+  listItem.textContent = productName;
   cardItemsList.appendChild(listItem);
 
   updateDisplayedValues();
