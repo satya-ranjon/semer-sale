@@ -108,9 +108,6 @@ let totalPrice = 0;
 let discountPercentage = 20;
 let couponCode = "";
 
-// Hide the modal initially
-hideModal();
-
 // Attach click event listeners to each product container
 singleProductContainers.forEach((container) => {
   container.addEventListener("click", () => {
